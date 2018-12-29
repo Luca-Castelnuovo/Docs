@@ -1,0 +1,2 @@
+"use strict";window.onload=function(){var e=null;e=null!=result?result.file:"swagger.json";var n=SwaggerUIBundle({url:e,dom_id:"#swagger-ui",deepLinking:!0,presets:[SwaggerUIBundle.presets.apis,SwaggerUIStandalonePreset],plugins:[SwaggerUIBundle.plugins.DownloadUrl],layout:"StandaloneLayout"});window.ui=n};
+//# sourceMappingURL=init.js.map
