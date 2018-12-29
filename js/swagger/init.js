@@ -1,13 +1,22 @@
-window.onload = function() {
-    var swagger_url = null;
-    if (result != null) {
-        swagger_url = result['file'];
-    } else {
-        swagger_url = 'swagger.json';
-    }
+function getService() {
+    let hash = window.location.hash.substr(1);
 
-    const ui = SwaggerUIBundle({
-        url: swagger_url,
+    let result = hash.split('&').reduce(function (result, item) {
+        let parts = item.split('=');
+        result[parts[0]] = parts[1];
+        return result;
+    }, {});
+
+    if (result != null) {
+        return result['service'];
+    } else {
+        location.replace('/');
+    }
+}
+
+function swaggerRender(service) {
+    let ui = SwaggerUIBundle({
+        url: service + '.json',
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
@@ -20,4 +29,15 @@ window.onload = function() {
         layout: "StandaloneLayout"
     })
     window.ui = ui
+
+    let topbar = document.querySelector('.topbar');
+    topbar.parentNode.removeChild(topbar);
+}
+
+window.onload = function() {
+    swaggerRender(getService());
+
+    window.addEventListener("hashchange", function () {
+        swaggerRender(getService());
+    });
 }
