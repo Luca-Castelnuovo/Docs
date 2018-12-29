@@ -21,7 +21,21 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="https://cdn.lucacastelnuovo.nl/general/css/materialize.css" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        .page-footer {
+            padding-top: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,27 +48,27 @@
           <a href="#" data-target="mobile" class="right sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="/" class="color-secondary">Home</a></li>
-            <li><a href="/services/swagger.html#service=api">API</a></li>
-            <li><a href="/services/swagger.html#service=accounts">Accounts</a></li>
-            <li><a href="/services/swagger.html#service=share">Share</a></li>
+            <li><a href="/services/#service=api">API</a></li>
+            <li><a href="/services/#service=accounts">Accounts</a></li>
+            <li><a href="/services/#service=share">Share</a></li>
           </ul>
         </div>
     </nav>
 
     <ul id="mobile" class="sidenav">
         <li><a href="/">Home</a></li>
-        <li><a href="/services/swagger.html#service=api">API</a></li>
-        <li><a href="/services/swagger.html#service=accounts">Accounts</a></li>
-        <li><a href="/services/swagger.html#service=share">Share</a></li>
+        <li><a href="/services/#service=api">API</a></li>
+        <li><a href="/services/#service=accounts">Accounts</a></li>
+        <li><a href="/services/#service=share">Share</a></li>
     </ul>
 </header>
 <main>
 
 
-<link rel="stylesheet" type="text/css" href="/css/swagger.css" >
-<script src="/js/swagger/bundle.js"> </script>
-<script src="/js/swagger/standalone.js"> </script>
-<script src="/js/swagger/init.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.lucacastelnuovo.nl/docs.lucacastelnuovo.nl/css/swagger.css" >
+<script src="https://cdn.lucacastelnuovo.nl/docs.lucacastelnuovo.nl/js/swagger/bundle.js"> </script>
+<script src="https://cdn.lucacastelnuovo.nl/docs.lucacastelnuovo.nl/js/swagger/standalone.js"> </script>
+<script src="https://cdn.lucacastelnuovo.nl/docs.lucacastelnuovo.nl/js/swagger/init.js"></script>
 <div id="swagger-ui"></div>
 
 </main>
@@ -70,7 +84,7 @@
 </body>
 
 <script src="https://cdn.lucacastelnuovo.nl/general/js/materialize.js"></script>
-<script src="/js/init.js"></script>
+<script src="https://cdn.lucacastelnuovo.nl/docs.lucacastelnuovo.nl/js/init.js"></script>
 
 </html>
 
