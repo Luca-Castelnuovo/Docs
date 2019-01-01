@@ -1,338 +1,338 @@
 {
-  "swagger" : "2.0",
-  "securityDefinitions" : {
-    "api_oauth" : {
-      "scopes" : {
-        "email:read" : "Read only access to profile email",
-        "email" : "Read and write access to profile email",
-        "basic" : "Read and write access to basic profile information",
-        "basic:read" : "Read only access to basic profile information",
-        "applications:read" : "Read only access to authorized applications"
-      },
-      "authorizationUrl" : "http:\/\/accounts.lucacastelnuovo.nl\/auth\/authorize",
-      "type" : "oauth2",
-      "flow" : "implicit"
-    }
-  },
-  "schemes" : [
-    "https"
-  ],
-  "paths" : {
-    "\/mail" : {
-      "post" : {
-        "summary" : "Send mail",
-        "parameters" : [
-          {
-            "schema" : {
-              "$ref" : "#\/definitions\/Pet"
-            },
-            "in" : "body",
-            "name" : "body",
-            "description" : "Pet object that needs to be added to the store",
-            "required" : true
-          }
-        ],
-        "security" : [
-          {
-            "api_oauth" : [
-              "basic:read"
-            ]
-          }
-        ],
-        "consumes" : [
-          "application\/json"
-        ],
-        "responses" : {
-          "405" : {
-            "description" : "Invalid input"
-          }
-        },
-        "description" : "",
-        "produces" : [
-          "application\/json"
-        ],
-        "tags" : [
-          "mail"
-        ],
-        "operationId" : "sendMail"
-      }
-    },
-    "\/user" : {
-      "post" : {
-        "summary" : "Create user",
-        "parameters" : [
-          {
-            "schema" : {
-              "$ref" : "#\/definitions\/User"
-            },
-            "in" : "body",
-            "name" : "body",
-            "description" : "Created user object",
-            "required" : true
-          }
-        ],
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        },
-        "description" : "This can only be done by the logged in user.",
-        "produces" : [
-          "application\/json"
-        ],
-        "tags" : [
-          "user"
-        ],
-        "operationId" : "createUser"
-      }
-    },
-    "\/user\/{username}" : {
-      "get" : {
-        "summary" : "Get user by user name",
-        "parameters" : [
-          {
-            "type" : "string",
-            "in" : "path",
-            "name" : "username",
-            "description" : "The name that needs to be fetched. Use user1 for testing. ",
-            "required" : true
-          }
-        ],
-        "responses" : {
-          "200" : {
-            "schema" : {
-              "$ref" : "#\/definitions\/User"
-            },
-            "description" : "successful operation"
-          },
-          "400" : {
-            "description" : "Invalid username supplied"
-          },
-          "404" : {
-            "description" : "User not found"
-          }
-        },
-        "description" : "",
-        "produces" : [
-          "application\/json"
-        ],
-        "tags" : [
-          "user"
-        ],
-        "operationId" : "getUserByName"
-      },
-      "put" : {
-        "summary" : "Updated user",
-        "parameters" : [
-          {
-            "type" : "string",
-            "in" : "path",
-            "name" : "username",
-            "description" : "name that need to be updated",
-            "required" : true
-          },
-          {
-            "schema" : {
-              "$ref" : "#\/definitions\/User"
-            },
-            "in" : "body",
-            "name" : "body",
-            "description" : "Updated user object",
-            "required" : true
-          }
-        ],
-        "responses" : {
-          "400" : {
-            "description" : "Invalid user supplied"
-          },
-          "404" : {
-            "description" : "User not found"
-          }
-        },
-        "description" : "This can only be done by the logged in user.",
-        "produces" : [
-          "application\/json"
-        ],
-        "tags" : [
-          "user"
-        ],
-        "operationId" : "updateUser"
-      },
-      "delete" : {
-        "summary" : "Delete user",
-        "parameters" : [
-          {
-            "type" : "string",
-            "in" : "path",
-            "name" : "username",
-            "description" : "The name that needs to be deleted",
-            "required" : true
-          }
-        ],
-        "responses" : {
-          "400" : {
-            "description" : "Invalid username supplied"
-          },
-          "404" : {
-            "description" : "User not found"
-          }
-        },
-        "description" : "This can only be done by the logged in user.",
-        "produces" : [
-          "application\/json"
-        ],
-        "tags" : [
-          "user"
-        ],
-        "operationId" : "deleteUser"
-      }
-    }
-  },
-  "host" : "api.lucacastelnuovo.nl",
-  "basePath" : "\/",
-  "definitions" : {
-    "Tag" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "name" : {
-          "type" : "string"
-        }
-      },
-      "xml" : {
-        "name" : "Tag"
-      }
-    },
-    "Category" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "name" : {
-          "type" : "string"
-        }
-      },
-      "xml" : {
-        "name" : "Category"
-      }
-    },
-    "Order" : {
-      "type" : "object",
-      "properties" : {
-        "quantity" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "id" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "shipDate" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "status" : {
-          "type" : "string",
-          "enum" : [
-            "placed",
-            "approved",
-            "delivered"
-          ],
-          "description" : "Order Status"
-        },
-        "petId" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "complete" : {
-          "type" : "boolean",
-          "default" : false
-        }
-      },
-      "xml" : {
-        "name" : "Order"
-      }
-    },
-    "User" : {
-      "type" : "object",
-      "properties" : {
-        "phone" : {
-          "type" : "string"
-        },
-        "password" : {
-          "type" : "string"
-        },
-        "firstName" : {
-          "type" : "string"
-        },
-        "id" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "userStatus" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "User Status"
-        },
-        "username" : {
-          "type" : "string"
-        },
-        "email" : {
-          "type" : "string"
-        },
-        "lastName" : {
-          "type" : "string"
-        }
-      },
-      "xml" : {
-        "name" : "User"
-      }
-    },
-    "ApiResponse" : {
-      "type" : "object",
-      "properties" : {
-        "type" : {
-          "type" : "string"
-        },
-        "message" : {
-          "type" : "string"
-        },
-        "code" : {
-          "type" : "integer",
-          "format" : "int32"
-        }
-      }
-    }
-  },
-  "tags" : [
-    {
-      "name" : "mail",
-      "description" : "Send mails from your application"
-    },
-    {
-      "name" : "recaptcha",
-      "description" : "Easily validate recaptcha responses"
-    },
-    {
-      "name" : "token",
-      "description" : "View info about access token"
-    },
-    {
-      "name" : "user",
-      "description" : "Operations about user"
-    }
-  ],
-  "info" : {
-    "contact" : {
-      "email" : "ltcastelnuovo@gmail.com"
-    },
-    "title" : "API",
-    "description" : "This is an example for the API server.",
-    "version" : "1.0.0"
-  }
+"basePath": "/",
+"definitions": {
+	"ApiResponse": {
+		"properties": {
+			"code": {
+				"format": "int32",
+				"type": "integer"
+				},
+			"message": {
+				"type": "string"
+				},
+			"type": {
+				"type": "string"
+				}
+			},
+		"type": "object"
+		},
+	"Category": {
+		"properties": {
+			"id": {
+				"format": "int64",
+				"type": "integer"
+				},
+			"name": {
+				"type": "string"
+				}
+			},
+		"type": "object",
+		"xml": {
+			"name": "Category"
+			}
+		},
+	"Order": {
+		"properties": {
+			"complete": {
+				"default": false,
+				"type": "boolean"
+				},
+			"id": {
+				"format": "int64",
+				"type": "integer"
+				},
+			"petId": {
+				"format": "int64",
+				"type": "integer"
+				},
+			"quantity": {
+				"format": "int32",
+				"type": "integer"
+				},
+			"shipDate": {
+				"format": "date-time",
+				"type": "string"
+				},
+			"status": {
+				"description": "Order Status",
+				"enum": [
+					"placed",
+					"approved",
+					"delivered"
+					],
+				"type": "string"
+				}
+			},
+		"type": "object",
+		"xml": {
+			"name": "Order"
+			}
+		},
+	"Tag": {
+		"properties": {
+			"id": {
+				"format": "int64",
+				"type": "integer"
+				},
+			"name": {
+				"type": "string"
+				}
+			},
+		"type": "object",
+		"xml": {
+			"name": "Tag"
+			}
+		},
+	"User": {
+		"properties": {
+			"email": {
+				"type": "string"
+				},
+			"firstName": {
+				"type": "string"
+				},
+			"id": {
+				"format": "int64",
+				"type": "integer"
+				},
+			"lastName": {
+				"type": "string"
+				},
+			"password": {
+				"type": "string"
+				},
+			"phone": {
+				"type": "string"
+				},
+			"username": {
+				"type": "string"
+				},
+			"userStatus": {
+				"description": "User Status",
+				"format": "int32",
+				"type": "integer"
+				}
+			},
+		"type": "object",
+		"xml": {
+			"name": "User"
+			}
+		}
+	},
+"host": "api.lucacastelnuovo.nl",
+"info": {
+	"contact": {
+		"email": "ltcastelnuovo@gmail.com"
+		},
+	"description": "This is an example for the API server.",
+	"title": "API",
+	"version": "1.0.0"
+	},
+"paths": {
+	"/mail": {
+		"post": {
+			"consumes": [
+				"application/json"
+				],
+			"description": "",
+			"operationId": "sendMail",
+			"parameters": [
+				{
+					"description": "Pet object that needs to be added to the store",
+					"in": "body",
+					"name": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/Pet"
+						}
+					}
+				],
+			"produces": [
+				"application/json"
+				],
+			"responses": {
+				"405": {
+					"description": "Invalid input"
+					}
+				},
+			"security": [
+				{
+					"api_oauth": [
+						"basic:read"
+						]
+					}
+				],
+			"summary": "Send mail",
+			"tags": [
+				"mail"
+				]
+			}
+		},
+	"/user": {
+		"post": {
+			"description": "This can only be done by the logged in user.",
+			"operationId": "createUser",
+			"parameters": [
+				{
+					"description": "Created user object",
+					"in": "body",
+					"name": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/User"
+						}
+					}
+				],
+			"produces": [
+				"application/json"
+				],
+			"responses": {
+				"default": {
+					"description": "successful operation"
+					}
+				},
+			"summary": "Create user",
+			"tags": [
+				"user"
+				]
+			}
+		},
+	"/user/{username}": {
+		"delete": {
+			"description": "This can only be done by the logged in user.",
+			"operationId": "deleteUser",
+			"parameters": [
+				{
+					"description": "The name that needs to be deleted",
+					"in": "path",
+					"name": "username",
+					"required": true,
+					"type": "string"
+					}
+				],
+			"produces": [
+				"application/json"
+				],
+			"responses": {
+				"400": {
+					"description": "Invalid username supplied"
+					},
+				"404": {
+					"description": "User not found"
+					}
+				},
+			"summary": "Delete user",
+			"tags": [
+				"user"
+				]
+			},
+		"get": {
+			"description": "",
+			"operationId": "getUserByName",
+			"parameters": [
+				{
+					"description": "The name that needs to be fetched. Use user1 for testing. ",
+					"in": "path",
+					"name": "username",
+					"required": true,
+					"type": "string"
+					}
+				],
+			"produces": [
+				"application/json"
+				],
+			"responses": {
+				"200": {
+					"description": "successful operation",
+					"schema": {
+						"$ref": "#/definitions/User"
+						}
+					},
+				"400": {
+					"description": "Invalid username supplied"
+					},
+				"404": {
+					"description": "User not found"
+					}
+				},
+			"summary": "Get user by user name",
+			"tags": [
+				"user"
+				]
+			},
+		"put": {
+			"description": "This can only be done by the logged in user.",
+			"operationId": "updateUser",
+			"parameters": [
+				{
+					"description": "name that need to be updated",
+					"in": "path",
+					"name": "username",
+					"required": true,
+					"type": "string"
+					},
+				{
+					"description": "Updated user object",
+					"in": "body",
+					"name": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/User"
+						}
+					}
+				],
+			"produces": [
+				"application/json"
+				],
+			"responses": {
+				"400": {
+					"description": "Invalid user supplied"
+					},
+				"404": {
+					"description": "User not found"
+					}
+				},
+			"summary": "Updated user",
+			"tags": [
+				"user"
+				]
+			}
+		}
+	},
+"schemes": [
+	"https"
+	],
+"securityDefinitions": {
+	"api_oauth": {
+		"authorizationUrl": "http://accounts.lucacastelnuovo.nl/auth/authorize",
+		"flow": "implicit",
+		"scopes": {
+			"applications:read": "Read only access to authorized applications",
+			"basic": "Read and write access to basic profile information",
+			"basic:read": "Read only access to basic profile information",
+			"email": "Read and write access to profile email",
+			"email:read": "Read only access to profile email"
+			},
+		"type": "oauth2"
+		}
+	},
+"swagger": "2.0",
+"tags": [
+	{
+		"description": "Send mails from your application",
+		"name": "mail"
+		},
+	{
+		"description": "Easily validate recaptcha responses",
+		"name": "recaptcha"
+		},
+	{
+		"description": "View info about access token",
+		"name": "token"
+		},
+	{
+		"description": "Operations about user",
+		"name": "user"
+		}
+	]
 }
