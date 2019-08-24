@@ -50,6 +50,12 @@
 		"oAP": "/build/application.html",
 		"oF": 0
 		},
+	"/build": {
+		"ft": 65536,
+		"oA": 1,
+		"oAP": "/build/build",
+		"oF": 0
+		},
 	"/css/swagger.css": {
 		"aP": 1,
 		"bl": 0,
