@@ -9,6 +9,14 @@
 	],
 "creatorBuild": "31491",
 "files": {
+	"/_headers": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/build/_headers",
+		"oF": 1
+		},
 	"/android-chrome-192x192.png": {
 		"ft": 32768,
 		"iS": 6206,
