@@ -1,2 +1,2 @@
-# Docs
-Website to host all my documentation for my projects
+# [DEPRECATED] Docs
+Host my documentation for my projects
